@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtx.mapper.HouselistMapper">
+  <resultMap id="BaseResultMap" type="com.mtx.model.entity.Houselist">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="houseid" jdbcType="VARCHAR" property="houseid" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="area" jdbcType="DOUBLE" property="area" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <!--  1.动态查询 房子集合 -->
+  <select id="findAllHouse" parameterType="com.mtx.model.vo.SearchBean" resultMap="BaseResultMap">
+    select * from houselist
+    <where>
+      <if test="search!=null and search!=''">
+        address like concat('%',#{search},'%')
+      </if>
+      <if test="select!=null and select!=''">
+        and status=#{select}
+      </if>
+    </where>
+  </select>
+</mapper>

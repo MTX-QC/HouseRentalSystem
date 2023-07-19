@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtx.mapper.PaidMapper">
+
+    <resultMap id="ZulistBeanResultMap" type="com.mtx.model.vo.ZulistBean">
+        <id column="zid" jdbcType="INTEGER" property="zid"/>
+        <id column="house_id" jdbcType="VARCHAR" property="house_id"/>    <!--这里有修改-->
+        <result column="price" jdbcType="DOUBLE" property="price"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="contract_id" jdbcType="INTEGER" property="contractId"/>
+        <association property="userlist" javaType="com.mtx.model.entity.Userlist">
+            <id column="id" jdbcType="INTEGER" property="id"/>
+            <id column="idcard" jdbcType="VARCHAR" property="idcard"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="phone" jdbcType="VARCHAR" property="phone"/>
+            <result column="user_id" jdbcType="INTEGER" property="userId"/>
+            <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        </association>
+    </resultMap>
+    <select id="findAllPaid" resultType="com.mtx.model.entity.Paid" >
+        select * from paid
+        <where>
+            <if test="name!=null and name!=''">
+                name = #{name}
+            </if>
+            <if test="search!=null and search!=''">
+                and name like concat('%',#{search},'%')
+            </if>
+            <if test="date!=null and date!='' and date1!=null and date1!=''">
+                and date between #{date} and #{date1}
+            </if>
+        </where>
+    </select>
+
+    <select id="findZulist" resultMap="ZulistBeanResultMap">
+        select * from zulist as z join userlist as u on z.user_id = u.user_id<where>
+        <if test="search!= null and search!=''">
+            address like concat('%',#{search},'%')
+        </if>
+    </where>
+    </select>
+
+    <select id="findAllTopaid" resultType="com.mtx.model.entity.Topaid">
+        select id,house_id,address,price,date,name,user_id,status from topaid
+        <where>
+            <if test="search!= null and search!=''">
+                name like concat('%',#{search},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertPaids">
+        insert into paid values
+        <foreach collection="paidlist" item="paid" separator=",">
+            (null,#{paid.house_id},#{paid.address},#{paid.price},#{paid.date},#{paid.paydate},#{paid.name},#{paid.user_id},#{paid.status})
+        </foreach>
+    </insert>
+
+    <delete id="delPaidById">
+        delete from paid where
+        <foreach collection="list" item="id" separator="or">
+            id =#{id}
+        </foreach>
+    </delete>
+</mapper>

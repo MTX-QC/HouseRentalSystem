@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtx.mapper.ApplyoutMapper">
+  <resultMap id="BaseResultMap" type="com.mtx.model.vo.ApplyoutBean">
+    <id column="aoid" jdbcType="INTEGER" property="aoid" />
+    <id column="house_id" jdbcType="VARCHAR" property="house_id" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <association property="userlist" javaType="com.mtx.model.entity.Userlist">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <id column="idcard" jdbcType="VARCHAR" property="idcard" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="user_id" jdbcType="INTEGER" property="userId" />
+      <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    </association>
+  </resultMap>
+  <!--  1.动态查询 房子集合 -->
+  <select id="findOut" parameterType="com.mtx.model.vo.SearchBean" resultMap="BaseResultMap">
+    select * from applyout as ao join userlist as u on ao.user_id=u.user_id
+    <where>
+      <if test="search!=null and search!=''">
+        address like concat('%',#{search},'%')
+      </if>
+      <if test="username!=null and username!=''">
+        and u.name=#{username}
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtx.mapper.ZulistMapper">
+      <resultMap id="BaseResultMap" type="com.mtx.model.vo.ZulistBean">
+        <id column="zid" jdbcType="INTEGER" property="zid" />
+        <id column="house_id" jdbcType="VARCHAR" property="house_id" />
+        <result column="price" jdbcType="DOUBLE" property="price" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="contract_id" jdbcType="INTEGER" property="contractId" />
+          <association property="userlist" javaType="com.mtx.model.entity.Userlist">
+              <id column="id" jdbcType="INTEGER" property="id" />
+              <id column="idcard" jdbcType="VARCHAR" property="idcard" />
+              <result column="name" jdbcType="VARCHAR" property="name" />
+              <result column="phone" jdbcType="VARCHAR" property="phone" />
+              <result column="user_id" jdbcType="INTEGER" property="userId" />
+              <result column="nickname" jdbcType="INTEGER" property="nickname" />
+
+          </association>
+      </resultMap>
+    <select id="findRentalDetails" parameterType="com.mtx.model.vo.SearchBean" resultMap="BaseResultMap">
+        SELECT *
+        FROM zulist as z join userlist as u on z.user_id = u.user_id
+        <where>
+            <if test="search != null and search != ''">
+                address LIKE CONCAT('%', #{search}, '%')
+            </if>
+            <if test="username!=null and username!=''">
+                and u.name=#{username}
+            </if>
+        </where>
+    </select>
+
+<!--    findAllSurrender-->
+
+    <resultMap id="BaseResultMap1" type="com.mtx.model.vo.CheckoutBean">
+        <id column="cid" jdbcType="INTEGER" property="cid" />
+        <id column="house_id" jdbcType="VARCHAR" property="house_id" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <association property="userlist" javaType="com.mtx.model.entity.Userlist">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <id column="idcard" jdbcType="VARCHAR" property="idcard" />
+            <result column="name" jdbcType="VARCHAR" property="name" />
+            <result column="phone" jdbcType="VARCHAR" property="phone" />
+            <result column="user_id" jdbcType="INTEGER" property="userId" />
+            <result column="nickname" jdbcType="INTEGER" property="nickname" />
+
+        </association>
+    </resultMap>
+    <select id="findAllSurrender" parameterType="com.mtx.model.vo.SearchBean" resultMap="BaseResultMap1">
+        SELECT *
+        FROM checkout as c join userlist as u on c.user_id = u.user_id
+        <where>
+            <if test="search != null and search != ''">
+                address LIKE CONCAT('%', #{search}, '%')
+            </if>
+            <if test="username!=null and username!=''">
+                and u.name=#{username}
+            </if>
+<!--        <if test="user_id != null and user_id != ''">
+                and c.user_id=#{user_id}
+            </if>-->
+        </where>
+    </select>
+
+    <!--我SQL语句写的一点都不好，有时间一定要好好学学SQL语句-->
+<!--    <resultMap id="RentalDetailsResultMap" type="com.mtx.model.entity.RentalDetails">
+        <id property="house_id" column="house_id"/>
+        <result property="address" column="address"/>
+        <result property="price" column="price"/>
+        <association property="Userlist" javaType="com.mtx.model.entity.Userlist">
+            <id column="companyId" property="id"/>
+            <result column="nickname" property="nickname"/>
+        </association>
+        <association property="nickname" resultMap="UserlistResultMap"/>
+        <association property="idcard" resultMap="UserlistResultMap"/>
+        <association property="phone" resultMap="UserlistResultMap"/>
+    </resultMap>-->
+
+    <resultMap id="RentalDetailsResultMap" type="com.mtx.model.entity.RentalDetails">
+        <id property="house_id" column="house_id"/>
+        <result property="address" column="address"/>
+        <result property="price" column="price"/>
+        <result property="nickname" column="nickname"/>
+        <result property="idcard" column="idcard"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+    <!--  1.动态查询 租凭集合 -->
+<!--    <select id="findRentalDetails" parameterType="com.mtx.model.vo.SearchBean" resultMap="RentalDetailsResultMap">
+        SELECT z.house_id, z.address, z.price, userlist.nickname, userlist.idcard, userlist.phone
+        FROM zulist z
+        JOIN userlist userlist ON z.user_id = userlist.user_id
+        <where>
+            <if test="search != null and search != ''">
+                AND z.address LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+    </select>-->
+
+
+
+</mapper>
