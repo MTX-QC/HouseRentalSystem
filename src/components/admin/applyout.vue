@@ -24,7 +24,7 @@
     >
       <el-table-column
         align="center"
-        prop="house_id"
+        prop="houseId"
         label="房屋ID"
         width="100"
       />
@@ -126,7 +126,7 @@ const getData = async () => {
 // 点击同意
 const handleEdit = (index, row) => {
   get("/api/agreeapplyout", {
-    house_id: row.house_id,
+    house_id: row.houseId,
   })
     .then((resp) => {
       if (resp.code === 200) {
@@ -159,7 +159,7 @@ const handleDelete = (index, row) => {
 };
 // 删除按钮
 const del = (index, row) => {
-  get("/api/delapplyout", { house_id: row.house_id })
+  get("/api/delapplyout", { house_id: row.houseId })
     .then((resp) => {
       if (resp.code === 200) {
         getData();

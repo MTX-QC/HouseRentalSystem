@@ -83,6 +83,7 @@ const shuaxin = () => {
 const onSubmit = () => {
   console.log(form.search);
   console.log("点击查询");
+  getData();
 };
 const tableData = ref([]);
 // 分页数据
@@ -94,7 +95,8 @@ const getData = async () => {
   console.log(cur.value + "<=====cur");
   console.log(size.value + "<=====size");
   console.log(total.value + "<=====total");
-  get("/api/zulist", {
+  get("/api/zulist1", {
+    search:form.search,
     cur: cur.value,
     size: size.value,
   }).then((resp) => {

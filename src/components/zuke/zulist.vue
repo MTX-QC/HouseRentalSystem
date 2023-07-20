@@ -89,7 +89,7 @@ const getData = () => {
   console.log(total.value + "<=====total");
   let s = window.sessionStorage.getItem("token-U");
   let user = JSON.parse(s);
-  get("/api/zulist", {
+  get("/api/zulist2", {
     search: form.search,
     cur: cur.value,
     size: size.value,

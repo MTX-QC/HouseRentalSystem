@@ -91,10 +91,10 @@ function disablesDate(time) {
   return time.getTime() <= _maxTime || time.getTime() > _minTime;
 }
 const form = reactive({
-  house_id: "",
+  houseId: "",
   address: "",
   zuke: "",
-  zuke_idcard: "",
+  zukeIdcard: "",
   fromdate: "",
   todate: "",
   price: "",
@@ -104,7 +104,8 @@ onMounted(() => {
   form.address = houselist.rowData.address;
   form.price = houselist.rowData.price;
   form.zuke = userInfo1.Info.nickname;
-  form.zukeIdcard = userInfo1.Info.idcard;
+  form.zukeIdcard = userInfo1.Info.idcard?.toString() || "123";
+  // form.chuzu_idcard = adminInfo1.Info.idcard?.toString() || "123"; // 使用可选链和空值默认值
 });
 
 const submitForm = (form) => {

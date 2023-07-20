@@ -1,8 +1,6 @@
 <template>
   <div class="header">
-    <span style="line-height: 30px"
-      >添加合同信息，请确定合同信息正确无误再提交！</span
-    >
+    <span style="line-height: 30px">添加合同信息，请确定合同信息正确无误再提交！</span>
   </div>
   <el-button type="success" onclick="history.go(-1)">返回</el-button>
   <div class="wrapper">
@@ -27,40 +25,28 @@
         <nav>{{ form.chuzu_idcard }}</nav>
       </el-form-item>
 
-      <el-form-item
-        label="每月交租日（数字）:"
-        :rules="[{ required: true, message: '交租日不能为空' }]"
-      >
-        <el-input
-          v-model="form.payday"
-          placeholder="请输入每月交租日"
-          type="number"
-          max="31"
-          min="1"
-        />
+      <el-form-item label="每月交租日（数字）:" :rules="[{ required: true, message: '交租日不能为空' }]">
+        <el-input v-model="form.payday" placeholder="请输入每月交租日" type="number" max="31" min="1"/>
       </el-form-item>
+
+      <el-form-item label="租方(乙方):">
+        <el-input v-model="form.zuke" placeholder="请输入租方姓名" />
+      </el-form-item>
+
       <div class="btn">
-        <el-button
-          type="primary"
-          @click="submitForm(form)"
-          style="margin-right: 50px"
-          >提交</el-button
-        >
+        <el-button type="primary" @click="submitForm(form)" style="margin-right: 50px">提交</el-button>
         <el-button type="warning" native-type="reset">重置</el-button>
       </div>
     </el-form>
   </div>
 </template>
-  
-  <script setup>
+
+<script setup>
 import { reactive, onMounted } from "vue";
 import { ElMessage } from "element-plus";
-import { get, post } from "@/api/request";
+import { post } from "@/api/request";
 import { adminStore } from "@/store/index";
 import { adminInfo } from "@/store/info";
-
-
-
 
 import { useRouter } from "vue-router";
 const router = useRouter();
@@ -75,24 +61,22 @@ const form = reactive({
   chuzu_idcard: "",
   price: "",
   payday: 10,
+  zuke: "", // 添加这个属性来存储乙方（租方）的昵称
 });
 
 onMounted(() => {
   console.log(adminInfo1.Info);
-  // 打印adminInfo1的值
   console.log(adminInfo1);
   form.houseId = houselist.rowData.houseId;
   form.address = houselist.rowData.address;
   form.price = houselist.rowData.price;
   form.chuzu = adminInfo1.Info.nickname;
-  form.chuzu_idcard = adminInfo1.Info.idcard?.toString() || "123"; // 使用可选链和空值默认值
+  form.chuzu_idcard = adminInfo1.Info.idcard?.toString() || "123";
 });
-
 
 const submitForm = (form) => {
   console.log(JSON.stringify(form));
-  // ajax 请求接口
-  post("/api/addhetong", form)
+  post("/api/addhetong", form) // 将 form 对象作为请求的主体（body）发送给后端
     .then((resp) => {
       if (resp.code === 200) {
         router.push("/applylist");
@@ -108,7 +92,8 @@ const submitForm = (form) => {
   console.log(form);
 };
 </script>
-  <style scoped>
+
+<style scoped>
 .header {
   height: 30px;
   border: 1px solid #eee;

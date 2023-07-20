@@ -31,21 +31,9 @@
       <el-table-column align="center" prop="address" label="地址" width="180" />
       <el-table-column align="center" prop="area" label="面积" width="100" />
       <el-table-column align="center" prop="price" label="价格" width="100" />
-      <el-table-column
-        align="center"
-        prop="userlist.nickname"
-        label="申请人姓名"
-      />
-      <el-table-column
-        align="center"
-        prop="userlist.idcard"
-        label="申请人身份证号"
-      />
-      <el-table-column
-        align="center"
-        prop="userlist.phone"
-        label="申请人联系电话"
-      />
+      <el-table-column align="center" prop="userlist.nickname" label="申请人姓名"/>
+      <el-table-column align="center" prop="userlist.idcard" label="申请人身份证号"/>
+      <el-table-column align="center" prop="userlist.phone" label="申请人联系电话"/>
       <el-table-column align="center" label="操作">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
@@ -151,9 +139,10 @@ const queren = () => {
   centerDialogVisible.value = false;
   router.push("/addhetong");
 };
+//这个应该是拒绝
 const handleDelete = (index, row) => {
   get("/api/Noapply", {
-    houseId: row.houseId,
+    house_id: row.houseId,
   })
     .then((resp) => {
       if (resp.code === 200) {

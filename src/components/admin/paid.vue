@@ -152,16 +152,16 @@ onMounted(() => {
 });
 
 // 批量删除
+const list = [];
 const deletes = () => {
-  let list = [];
+  
   centerDialogVisible.value = true;
-  multipleSelection.value.forEach((item) => list.push(item.house_id));
+  multipleSelection.value.forEach((item) => list.push(item.id));
 };
 // 点击删除按钮
 const handleDelete = (index, row) => {
-  let list = [];
   centerDialogVisible.value = true;
-  list.push(row.house_id);
+  list.push(row.id);
 };
 const queren = () => {
   centerDialogVisible.value = false;

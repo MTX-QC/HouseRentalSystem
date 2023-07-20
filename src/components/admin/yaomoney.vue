@@ -67,7 +67,7 @@ onMounted(() => {
   form.house_id = houselist.rowData.house_id;
   form.address = houselist.rowData.address;
   form.price = houselist.rowData.price;
-  form.name = houselist.rowData.userlist.nickname;
+  form.name = houselist.rowData.userlist.name;
   form.user_id = houselist.rowData.user_id;
 });
 

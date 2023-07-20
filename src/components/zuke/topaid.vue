@@ -86,18 +86,18 @@ const getData = () => {
   });
 };
 const r = reactive({
-  house_id: "",
+  id: "",
 });
 // 支付租金
 const handleEdit = (index, row) => {
   centerDialogVisible.value = true;
-  r.house_id = row.house_id;
+  r.id = row.id;
   console.log(index, row);
 };
 const queren = () => {
   centerDialogVisible.value = false;
   get("/api/gotopay", {
-    house_id: r.house_id,
+    id: r.id,
   }).then((resp) => {
     if (resp.code == 200) {
       getData();

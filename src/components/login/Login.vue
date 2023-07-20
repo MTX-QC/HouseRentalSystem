@@ -152,7 +152,7 @@ const router = useRouter();
 const login = () => {
   loginFormRef.value.validate((valid) => {
     if (valid) {
-      post("http://127.0.0.1:8081/api/user/login", loginForm)
+      post("http://127.0.0.1:8081/api/login", loginForm)
         .then((resp) => {
           console.log(resp.data.type);
           if (resp.code === 200) {
@@ -189,7 +189,7 @@ const register = () => {
     registerFormRef.value.validate((valid) => {
       if (valid) {
         console.log(registerForm);
-        post("/api/user/register", {
+        post("/api/register", {
           username: registerForm.username,
           password: registerForm.password,
           confirmPassword: registerForm.confirmPassword,

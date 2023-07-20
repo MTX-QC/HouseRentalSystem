@@ -12,8 +12,8 @@
       <el-form-item label="电话" prop="phone">
         <el-input v-model="ruleForm.phone"></el-input>
       </el-form-item>
-      <el-form-item label="证件号" prop="id">
-        <el-input v-model="ruleForm.id"></el-input>
+      <el-form-item label="证件号" prop="idcard">
+        <el-input v-model="ruleForm.idcard"></el-input>
       </el-form-item>
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="ruleForm.nickname"></el-input>
@@ -70,12 +70,12 @@ export default {
     return {
       ruleForm: {
         phone: "",
-        id: "",
+        idcard: "",
         nickname: "",
       },
       rules: {
         phone: [{ validator: checkAge, trigger: "blur" }],
-        id: [{ validator: checkId, trigger: "blur" }],
+        idcard: [{ validator: checkId, trigger: "blur" }],
       },
     };
   },
@@ -86,7 +86,7 @@ export default {
           // 请求axios
           if (
             this.ruleForm.phone == "" &&
-            this.ruleForm.id == "" &&
+            this.ruleForm.idcard == "" &&
             this.ruleForm.nickname == ""
           ) {
             ElMessage.error("信息不能为空");

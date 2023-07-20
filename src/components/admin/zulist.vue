@@ -86,7 +86,7 @@ const getData = async () => {
   console.log(cur.value + "<=====cur");
   console.log(size.value + "<=====size");
   console.log(total.value + "<=====total");
-  get("/api/zulist", {
+  get("/api/zulist2", {
     search: form.search,
     cur: cur.value,
     size: size.value,
