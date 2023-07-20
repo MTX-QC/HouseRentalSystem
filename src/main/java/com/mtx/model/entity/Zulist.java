@@ -1,13 +1,15 @@
 package com.mtx.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Zulist extends ZulistKey {
     private Double price;
 
     private String address;
-
+    @JsonProperty(value = "user_id")
     private Integer userId;
 //    private Integer user_id;
-
+    @JsonProperty(value = "contract_id")
     private Integer contractId;
 //    private Integer contract_id;
 

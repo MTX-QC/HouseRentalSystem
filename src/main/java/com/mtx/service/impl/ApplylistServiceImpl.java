@@ -6,6 +6,7 @@ import com.mtx.mapper.ApplyMapper;
 
 import com.mtx.mapper.ApplyoutMapper;
 import com.mtx.model.entity.Applyout;
+import com.mtx.model.entity.Hetong;
 import com.mtx.model.entity.Houselist;
 import com.mtx.model.vo.ApplyBean;
 import com.mtx.model.vo.ApplyoutBean;
@@ -46,6 +47,39 @@ public class ApplylistServiceImpl implements ApplylistService {
         return map;
     }
 
+    //管理员同意租赁
+    public Result addhetong(Hetong hetong){
+//        最开始的写法
+        //        int i = applyMapper.addhetong(hetong);
+
+        String zuke = hetong.getZuke();
+        int zukeUserId = applyMapper.findUserIdFromZuKe(zuke);
+        String houseId = hetong.getHouseId();
+        Double price = hetong.getPrice();
+        String address = hetong.getAddress();
+        int i1= applyMapper.addzulist(houseId,price,address,zukeUserId);
+        //还要再写一条删除的语句，其实可以尝试调用拒绝租凭那个语句
+        int i = applyMapper.noApply(houseId);
+
+
+        if (i1 == 0){
+            return new Result(100,"操作失败");
+        }else {
+            return new Result(200,"已同意");
+        }
+    }
+
+    //管理员拒绝租赁
+    public Result noApply(String house_id){
+        int i = applyMapper.noApply(house_id);
+//        int i2 = applyMapper.deletezulist(house_id);
+        if (i == 0){
+            return new Result(100,"操作失败");
+        }else {
+            return new Result(200,"已拒绝");
+        }
+    }
+
 //    退房记录
     @Override
     public HashMap<String, Object> findOut(SearchBean searchBean) {
@@ -66,8 +100,9 @@ public class ApplylistServiceImpl implements ApplylistService {
 
 //    同意退租
     @Override
-    public Result agreeOut(Integer house_id) {
+    public Result agreeOut(String house_id) {
         int i = applyoutMapper.agreeOut(house_id);
+        int i2 = applyMapper.deletezulist(house_id);
         if (i == 0){
             return new Result(100,"已拒绝");
         }else {
@@ -75,19 +110,9 @@ public class ApplylistServiceImpl implements ApplylistService {
         }
     }
 
-    @Override
-    public Result delApplyOut(Integer house_id) {
-        int i = applyoutMapper.delApplyOut(house_id);
-        if (i == 0){
-            return new Result(100,"删除失败");
-        }else {
-            return new Result(200,"删除成功");
-        }
-    }
-
     //拒绝退租
     @Override
-    public Result jujueApplyout(Integer house_id) {
+    public Result jujueApplyout(String house_id) {
         int i = applyoutMapper.jujueApplyout(house_id);
         if (i == 0){
             return new Result(100,"拒绝退租操作失败");
@@ -95,5 +120,16 @@ public class ApplylistServiceImpl implements ApplylistService {
             return new Result(200,"已拒绝退租");
         }
     }
+
+    //删除
+    public Result delapplyout(String house_id){
+        int i = applyoutMapper.delapplyout(house_id);
+        if (i == 0){
+            return new Result(100,"删除失败");
+        }else {
+            return new Result(200,"已删除");
+        }
+    }
+
 
 }

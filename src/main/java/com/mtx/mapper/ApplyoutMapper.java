@@ -20,13 +20,16 @@ public interface ApplyoutMapper {
     public List<ApplyoutBean> findOut(SearchBean searchBean);
     //同意退租
     @Update("UPDATE applyout SET status = '已同意' WHERE house_id = #{house_id}")
-    int agreeOut(Integer house_id);
+    //要加一条数据到zulist中
+    int agreeOut(String house_id);
+
+
     //拒绝退租
     @Update("UPDATE applyout SET status = '已拒绝' WHERE house_id = #{house_id}")
-    int jujueApplyout(Integer house_id);
+    int jujueApplyout(String house_id);
 
     //删除
     @Delete("delete from applyout where house_id = #{house_id}")
-    int delApplyOut(Integer house_id);
+    int delapplyout(String house_id);
 
 }

@@ -31,7 +31,7 @@ public interface RentalInformationService {
     Result deleteCheck(String[] house_ids);
 
     //申请看房
-    Result applyCheckUserList(Hetong hetong);
+    Result applyCheckUserList(Hetong hetong,HttpServletRequest request);
 
     //申请退租
     Result addApplyOut(String house_id,HttpServletRequest request);

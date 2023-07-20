@@ -11,7 +11,8 @@ import java.util.HashMap;
 
 public interface UserService {
     //注册用户信息
-//    public Result addUser(User user);
+    public Result addUser(User user);
+
 
     //登录
 //    Result login(User user);
@@ -21,6 +22,8 @@ public interface UserService {
 //    Result userInfo(HttpServletRequest request);
 
 
+    //这个是保障模块加的
+    User findUserByName(String name);
 
     Result login(User user);
 
@@ -30,7 +33,7 @@ public interface UserService {
 
     Result putInfo(Userlist userlist, HttpServletRequest request);
 
-//    Result putPassword(User user, HttpServletRequest request);
+    Result putPassword(User user, HttpServletRequest request);
 
     Result insertschedule(Schedule schedule);
 

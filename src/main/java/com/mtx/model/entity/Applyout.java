@@ -3,14 +3,14 @@ package com.mtx.model.entity;
 public class Applyout {
     private Integer aoid;
 
-//    private String houseId;
+    private String houseId;
     private String house_id;
 
     private String address;
 
     private String status;
 
-//    private Integer userId;
+    private Integer userId;
     private Integer user_id;
 
     public Integer getAoid() {
@@ -29,13 +29,13 @@ public class Applyout {
         this.house_id = house_id;
     }
 
-    /*    public String getHouseId() {
+        public String getHouseId() {
         return houseId;
     }
 
     public void setHouseId(String houseId) {
         this.houseId = houseId == null ? null : houseId.trim();
-    }*/
+    }
 
     public String getAddress() {
         return address;
@@ -60,11 +60,11 @@ public class Applyout {
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
-/*    public Integer getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }*/
+    }
 }

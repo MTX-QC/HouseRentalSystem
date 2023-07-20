@@ -3,6 +3,7 @@ package com.mtx.mapper;
 import com.mtx.model.entity.*;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -49,8 +50,19 @@ public interface HetongMapper {
     @Update("UPDATE zulist SET address = #{address},price = #{price} WHERE house_id = #{house_id}")
     int editZulist(Hetong hetong);
 
-    //申请看房  直接就添加到合同里面去了，这个设计实在是太棒了
-    @Insert("insert into hetong (chuzu,chuzu_idcard,zuke, zuke_idcard, fromdate, todate,price,address,house_id) VALUES " +
-            "(#{chuzu},#{chuzu_idcard},#{zuke}, #{zuke_idcard}, #{fromdate}, #{todate}, #{price}, #{address}, #{house_id})")
-    int applyCheckUserList(Hetong hetong);
+    //申请看房
+//    @Insert("insert into hetong (chuzu,chuzu_idcard,zuke, zuke_idcard, fromdate, todate,price,address,house_id) VALUES " +
+//            "(#{chuzu},#{chuzu_idcard},#{zuke}, #{zuke_idcard}, #{fromdate}, #{todate}, #{price}, #{address}, #{house_id})")
+    @Insert("insert into apply (house_id,address,area, price, apply_date, status,user_id) VALUES " +
+            "(#{house_id},#{address},#{area}, #{price}, #{fromdate}, '申请中', #{user_id})")
+    int applyCheckUserList(String house_id, String address, Double area, Double price, String fromdate,Integer user_id);
+
+    //通过houseId查房子的面积
+    @Select("select area from houselist where houseid=#{houseId}")
+    Double findArea(String houseId);
+
+    //修改houselist表中的状态
+    @Update("update houselist set status='申请中' where houseid=#{house_id}")
+    int editHouseListStatus(String house_id);
+
 }

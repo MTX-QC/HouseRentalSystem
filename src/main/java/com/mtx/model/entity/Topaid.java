@@ -1,5 +1,7 @@
 package com.mtx.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Topaid {
@@ -29,6 +31,7 @@ public class Topaid {
 
     private Double price;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date date;
 
     private String name;

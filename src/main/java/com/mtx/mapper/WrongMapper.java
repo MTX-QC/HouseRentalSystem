@@ -1,19 +1,22 @@
 package com.mtx.mapper;
 
 import com.mtx.model.entity.Wrong;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
 
+import java.util.List;
+
+@Mapper
 public interface WrongMapper {
-/*    int deleteByPrimaryKey(Integer id);
 
-    int insert(Wrong record);
+    @Insert("insert into wrong (house_id,address,date,detail,name,user_id,status) values(#{houseId},#{address},#{date},#{detail},#{name},#{userId},#{status})")
+    int addWrong(Wrong record);
 
-    int insertSelective(Wrong record);
+    List<Wrong> findWrongByUserName(String username);
 
-    Wrong selectByPrimaryKey(Integer id);
+    List<Wrong> findAllWrong();
 
-    int updateByPrimaryKeySelective(Wrong record);
+    Wrong findWrongById(int id);
 
-    int updateByPrimaryKeyWithBLOBs(Wrong record);
-
-    int updateByPrimaryKey(Wrong record);*/
+    int deleteWrongById(int id);
 }

@@ -3,10 +3,10 @@
 <mapper namespace="com.mtx.mapper.ApplyoutMapper">
   <resultMap id="BaseResultMap" type="com.mtx.model.vo.ApplyoutBean">
     <id column="aoid" jdbcType="INTEGER" property="aoid" />
-    <id column="house_id" jdbcType="VARCHAR" property="house_id" />
+    <id column="house_id" jdbcType="VARCHAR" property="houseId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <association property="userlist" javaType="com.mtx.model.entity.Userlist">
       <id column="id" jdbcType="INTEGER" property="id" />
       <id column="idcard" jdbcType="VARCHAR" property="idcard" />

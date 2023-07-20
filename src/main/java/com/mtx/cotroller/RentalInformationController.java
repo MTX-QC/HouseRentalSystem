@@ -19,7 +19,7 @@ public class RentalInformationController {
     RentalInformationService rentalInformationService;
 
     //查询所有的在租列表
-    @RequestMapping(value = "/zulist", method = RequestMethod.GET)
+    @RequestMapping(value = "/zulist2", method = RequestMethod.GET)
     public HashMap<String, Object> findAllRental(SearchBean searchBean) {
         HashMap<String, Object> rentalList = rentalInformationService.findAllRental(searchBean);
         return rentalList;
@@ -63,8 +63,9 @@ public class RentalInformationController {
 
     //申请看房    applycheckuserlist
     @RequestMapping(value = "/applycheckuserlist",method = RequestMethod.POST)
-    public Result applyCheckUserList(@RequestBody Hetong hetong){
-        Result applyCheckUserList = rentalInformationService.applyCheckUserList(hetong);
+    public Result applyCheckUserList(@RequestBody Hetong hetong,HttpServletRequest request){
+        System.out.println(hetong);
+        Result applyCheckUserList = rentalInformationService.applyCheckUserList(hetong,request);
         return applyCheckUserList;
     }
 

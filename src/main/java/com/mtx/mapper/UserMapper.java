@@ -35,8 +35,9 @@ public interface UserMapper {
     @Insert("insert into user (username,password,type) values(#{username},#{password},'用户')")
     void newUser(User user);
 
-    @Select("select userlist.*,user.password from userlist join user on userlist.user_id = user.id where user_id = #{userId}")
-    Userlist findByUid(Integer userId);
+//    @Select("select userlist.*,user.password from userlist join user on userlist.user_id = user.id where user_id = #{userId}")
+    @Select("select userlist.*,user.password from userlist join user on userlist.user_id=user.id where userlist.user_id = #{user_id}")
+    Userlist findByUid(Integer user_id);
 
     @Update("update userlist set phone = #{phone} , idcard = #{id} , nickname = #{nickname} where user_id = #{userId}")
     void putInfo(@Param("phone") String phone, @Param("id") String idcard, @Param("nickname")String nickname, Integer userId);

@@ -7,12 +7,12 @@ public class Hetong implements Serializable {
 
     private String chuzu;
 
-//    private String chuzuIdcard;
+    private String chuzuIdcard;
 
     private String chuzu_idcard;
     private String zuke;
 
-//    private String zukeIdcard;
+    private String zukeIdcard;
     private String zuke_idcard;
 
     private String fromdate;
@@ -23,7 +23,7 @@ public class Hetong implements Serializable {
 
     private String address;
 
-//    private String houseId;
+    private String houseId;
     private String house_id;
 
     private Integer payday;
@@ -44,13 +44,13 @@ public class Hetong implements Serializable {
         this.chuzu = chuzu == null ? null : chuzu.trim();
     }
 
-/*    public String getChuzuIdcard() {
+    public String getChuzuIdcard() {
         return chuzuIdcard;
     }
 
     public void setChuzuIdcard(String chuzuIdcard) {
         this.chuzuIdcard = chuzuIdcard == null ? null : chuzuIdcard.trim();
-    }*/
+    }
 
     public String getChuzu_idcard() {
         return chuzu_idcard;
@@ -68,13 +68,13 @@ public class Hetong implements Serializable {
         this.zuke = zuke == null ? null : zuke.trim();
     }
 
-/*    public String getZukeIdcard() {
+    public String getZukeIdcard() {
         return zukeIdcard;
     }
 
     public void setZukeIdcard(String zukeIdcard) {
         this.zukeIdcard = zukeIdcard == null ? null : zukeIdcard.trim();
-    }*/
+    }
 
     public String getZuke_idcard() {
         return zuke_idcard;
@@ -116,13 +116,13 @@ public class Hetong implements Serializable {
         this.address = address == null ? null : address.trim();
     }
 
-/*    public String getHouseId() {
+    public String getHouseId() {
         return houseId;
     }
 
     public void setHouseId(String houseId) {
         this.houseId = houseId == null ? null : houseId.trim();
-    }*/
+    }
 
     public String getHouse_id() {
         return house_id;

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JwtUtils jwtUtils;*/
 
-/*    @Override
+    @Override
     public Result addUser(User user) {
         //用户名不重复
         User user1 = userMapper.selectByName(user.getUsername());
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
             userMapper.addUser(user);
             return new Result(200,"注册成功");
         }
-    }*/
+    }
 
 /*    @Override
     public Result login(User user) {
@@ -83,6 +83,12 @@ public class UserServiceImpl implements UserService {
     private JwtUtils jwtUtils;
     @Resource
     private UserMapper userMapper;
+
+    //这个是保障模块加的
+    @Override
+    public User findUserByName(String name) {
+        return userMapper.selectByName(name);
+    }
     @Override
     public Result login(User user) {
         User user1 = userMapper.findUser(user);
@@ -121,14 +127,14 @@ public class UserServiceImpl implements UserService {
 
     /*这里有个问题*/
 
-/*    @Override
+    @Override
     public Result putPassword(@RequestBody User user, HttpServletRequest request) {
         String token = request.getHeader("token");
         String uuid = jwtUtils.getUsernameFromToken(token);
         int user_id = Integer.parseInt(uuid);
         userMapper.putPassword(user.getPass(),user_id);
         return new Result(200,"修改成功");
-    }*/
+    }
 
     @Override
     public Result insertschedule(Schedule schedule) {
@@ -177,4 +183,6 @@ public class UserServiceImpl implements UserService {
 //        List<Schedule> schedules = userMapper.selectByDate(schedule);
 //        return new Result(200,schedules,"查询成功");
 //    }
+
+
 }

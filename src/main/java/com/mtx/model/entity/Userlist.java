@@ -1,13 +1,18 @@
 package com.mtx.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Userlist extends UserlistKey {
     private String name;
 
     private String phone;
 
     private Integer userId;
+    private Integer user_id;
 
     private String nickname;
+
+    private String password;
 
     public String getName() {
         return name;
@@ -39,5 +44,21 @@ public class Userlist extends UserlistKey {
 
     public void setNickname(String nickname) {
         this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

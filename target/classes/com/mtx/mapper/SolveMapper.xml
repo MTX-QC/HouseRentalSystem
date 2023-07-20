@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtx.mapper.SolveMapper">
+    <resultMap id="solveMap" type="com.mtx.model.entity.Wrong">
+        <id property="id" column="id"/>
+        <result property="status" column="status"/>
+        <result property="houseId" column="house_id"/>
+        <result property="address" column="address"/>
+        <result property="date" column="date"/>
+        <result property="name" column="name"/>
+        <result property="userId" column="user_id"/>
+        <result property="detail" column="detail"/>
+    </resultMap>
+    <insert id="addSolve" parameterType="com.mtx.model.entity.Solve">
+        insert into solve (house_id, address, date, detail, name, user_id, status)
+        values (#{houseId}, #{address}, #{date}, #{detail}, #{name}, #{userId}, #{status})
+    </insert>
+
+    <delete id="deleteSolveById">
+        delete
+        from solve
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteBatchSolve">
+        delete
+        from solve
+        where id in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="findSolveByUserName" resultMap="solveMap">
+        select *
+        from solve
+        where name = #{username}
+    </select>
+
+    <select id="findSolveByUNameAndTime" resultMap="solveMap">
+        select *
+        from solve
+        <where>
+            <if test="username != null and username != ''">
+                and name = #{username}
+            </if>
+            <if test="date != null and date != ''">
+                and `date` >= #{date}
+            </if>
+            <if test="date1 != null and date1 != ''">
+                and `date` &lt;= #{date1}
+            </if>
+        </where>
+    </select>
+</mapper>

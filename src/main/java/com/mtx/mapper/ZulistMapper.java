@@ -37,6 +37,6 @@ public interface ZulistMapper {
     //终止合同
     @Delete("DELETE FROM zulist WHERE house_id = #{house_id}")
     int deleteHeTong(String house_id);
-
+    List<ZulistBean> selectByUserId(int user_id);
 
 }

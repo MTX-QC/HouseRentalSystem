@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -116,9 +117,26 @@ public class RentalInformationServiceImpl implements RentalInformationService {
         return new Result(100,"删除失败");
     }
 
+    //申请看房
     @Override
-    public Result applyCheckUserList(Hetong hetong) {
-        int i = hetongMapper.applyCheckUserList(hetong);
+    public Result applyCheckUserList(Hetong hetong,HttpServletRequest request) {
+        //获取token头
+        String token = request.getHeader("token");
+        System.out.println(token);
+        //根据用户id去查询用户信息
+        String uuid = jwtUtils.getUsernameFromToken(token);
+        Integer user_id = Integer.parseInt(uuid);
+
+
+        String house_id = hetong.getHouseId();
+        String address = hetong.getAddress();
+        Double area = hetongMapper.findArea(hetong.getHouseId());
+        Double price = hetong.getPrice();
+        String fromdate = hetong.getFromdate();
+        //添加一条信息到apply中
+        int i = hetongMapper.applyCheckUserList(house_id, address, area, price, fromdate, user_id);
+        //修改houselist表中的状态
+        int i1 = hetongMapper.editHouseListStatus(house_id);
         if (i==0){
             return new Result(100,"申请失败");
         }
@@ -126,7 +144,7 @@ public class RentalInformationServiceImpl implements RentalInformationService {
     }
 
 
-    //申请看房
+    //申请退租
     @Override
     public Result addApplyOut(String house_id,HttpServletRequest request) {
         //获取token头
@@ -136,9 +154,10 @@ public class RentalInformationServiceImpl implements RentalInformationService {
         String uuid = jwtUtils.getUsernameFromToken(token);
         Integer user_id = Integer.parseInt(uuid);
         System.out.println(user_id);
-        String houseList = applyoutMapper.findHouseList(house_id);
-        if (houseList != null){
-            int i = applyoutMapper.addApplyOut(house_id,houseList,user_id);
+        String address = applyoutMapper.findHouseList(house_id);
+        System.out.println(address);
+        if (address != null){
+            int i = applyoutMapper.addApplyOut(house_id,address,user_id);
             if (i>0){
                 return new Result(200,"申请成功");
             }

@@ -1,19 +1,21 @@
 package com.mtx.mapper;
 
 import com.mtx.model.entity.Solve;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+@Mapper
 public interface SolveMapper {
-/*    int deleteByPrimaryKey(Integer id);
+    List<Solve> findSolveByUserName(String username);
 
-    int insert(Solve record);
+    int addSolve(Solve solve);
 
-    int insertSelective(Solve record);
+    List<Solve> findSolveByUNameAndTime(@Param("username") String username, @Param("date") String date,
+                                        @Param("date1") String date1);
 
-    Solve selectByPrimaryKey(Integer id);
+    int deleteSolveById(int id);
 
-    int updateByPrimaryKeySelective(Solve record);
-
-    int updateByPrimaryKeyWithBLOBs(Solve record);
-
-    int updateByPrimaryKey(Solve record);*/
+    int deleteBatchSolve(int[] list);
 }

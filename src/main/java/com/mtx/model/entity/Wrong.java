@@ -1,5 +1,7 @@
 package com.mtx.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Wrong {
@@ -9,6 +11,7 @@ public class Wrong {
 
     private String address;
 
+    @JsonFormat(locale = "cn", timezone = "gmt+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
     private String name;

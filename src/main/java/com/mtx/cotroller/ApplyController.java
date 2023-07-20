@@ -27,6 +27,21 @@ public class ApplyController {
         return map;
     }
 
+    //管理员同意租赁
+    @RequestMapping(value = "/addhetong",method = RequestMethod.POST)
+    public Result addhetong(@RequestBody Hetong hetong){
+        System.out.println(hetong);
+        Result result = applylistService.addhetong(hetong);
+        return result;
+    }
+
+    //管理员拒绝租赁
+    @RequestMapping(value = "/Noapply",method = RequestMethod.GET)
+    public Result noApply(String house_id){
+        Result result = applylistService.noApply(house_id);
+        return result;
+    }
+
     //退租记录
     @RequestMapping(value = "/applyout",method = RequestMethod.GET)
     public HashMap<String,Object> findOut(SearchBean searchBean) {
@@ -36,23 +51,22 @@ public class ApplyController {
 
     //同意退租
     @RequestMapping(value = "/agreeapplyout",method = RequestMethod.GET)
-    public Result agreeOut(Integer house_id){
-        System.out.println(house_id);
+    public Result agreeOut(String house_id){
         Result result = applylistService.agreeOut(house_id);
         return result;
     }
 
-    //拒绝退租  delapplyout
-    @RequestMapping(value = "/jujueApplyout")
-    public Result jujueApplyout(Integer house_id){
+    //拒绝退租
+    @RequestMapping(value = "/jujueApplyout",method = RequestMethod.GET)
+    public Result jujueApplyout(String house_id){
         Result result = applylistService.jujueApplyout(house_id);
         return result;
     }
 
-    //删除  delapplyout
+    //删除
     @RequestMapping(value = "/delapplyout",method = RequestMethod.GET)
-    public Result delApplyOut(Integer house_id){
-        Result result = applylistService.delApplyOut(house_id);
+    public Result delapplyout(String house_id){
+        Result result = applylistService.delapplyout(house_id);
         return result;
     }
 

@@ -60,14 +60,14 @@ public class PaidController {
      * @return
      */
 
-/*    @RequestMapping(value = "zulist", method = RequestMethod.GET)
+    @RequestMapping(value = "zulist1", method = RequestMethod.GET)
     public HashMap<String, Object> zulist(HttpServletRequest request) {
         String search = request.getParameter("search");
         Integer cur = Integer.parseInt(request.getParameter("cur"));
         Integer size = Integer.parseInt(request.getParameter("size"));
         HashMap<String, Object> map = paidService.findZulist(search, cur, size);
         return map;
-    }*/
+    }
 
     //收租
     @RequestMapping(value = "addtopaid", method = RequestMethod.POST)

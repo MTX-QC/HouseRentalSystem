@@ -38,7 +38,7 @@ public class WrongController {
 
     @RequestMapping(value = "/wronglist", method = RequestMethod.GET)
     public Result wrongList(String name) {
-        if ("admin".equals(name)) {
+        if ("mtx".equals(name)) {
             return wrongService.selectAllWrongByUserName();
         }
         return wrongService.selectWrongByUserName(name);

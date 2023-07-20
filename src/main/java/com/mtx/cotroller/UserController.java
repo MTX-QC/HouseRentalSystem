@@ -18,22 +18,24 @@ import java.util.HashMap;
 @CrossOrigin
 public class UserController {
 
-/*    @Autowired
+    /*    @Autowired
+        private UserService userService;*/
+    @Resource
     private UserService userService;
 
     //注册功能
-    @RequestMapping(value = "register",method = RequestMethod.POST)
-    public Result register(@RequestBody User user){
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public Result register(@RequestBody User user) {
         Result result = userService.addUser(user);
         return result;
     }
 
     //登录功能
-    @RequestMapping(value = "login",method = RequestMethod.POST)
-    public Result Login(@RequestBody User user){
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public Result Login(@RequestBody User user) {
         Result result = userService.login(user);
         return result;
-    }*/
+    }
 
     //查看用户的个人信息
 /*    @RequestMapping(value = "/getUserList",method = RequestMethod.GET)
@@ -49,52 +51,55 @@ public class UserController {
         return result;
     }*/
 
-    @Resource
-    private UserService userService;
+
     @GetMapping("getUserList")
     public Result userInfo(HttpServletRequest request) {
         Result result = userService.userInfo(request);
         return result;
     }
+
     @PostMapping(value = "editUser")
-    public Result putInfo(@RequestBody Userlist userlist,HttpServletRequest request){
+    public Result putInfo(@RequestBody Userlist userlist, HttpServletRequest request) {
         Result result = userService.putInfo(userlist, request);
         return result;
     }
+
     @PostMapping(value = "editUserfd")
-    public Result putInfofd(@RequestBody Userlist userlist, HttpServletRequest request){
+    public Result putInfofd(@RequestBody Userlist userlist, HttpServletRequest request) {
         Result result = userService.putInfo(userlist, request);
         return result;
     }
-/*    @PostMapping("editUserPass")
-    public Result putpassword(@RequestBody User user,HttpServletRequest request){
-        Result result = userService.putPassword(user, request);
-        return result;
-    }
-    @PostMapping("editUserPassfd")
-    public Result putpasswordfd(@RequestBody User user,HttpServletRequest request){
-        Result result = userService.putPassword(user, request);
-        return result;
-    }*/
+
+     @PostMapping("editUserPass")
+        public Result putpassword(@RequestBody User user,HttpServletRequest request){
+            Result result = userService.putPassword(user, request);
+            return result;
+        }
+        @PostMapping("editUserPassfd")
+        public Result putpasswordfd(@RequestBody User user,HttpServletRequest request){
+            Result result = userService.putPassword(user, request);
+            return result;
+        }
     @PostMapping("insertschedule")
-    public Result insertschedule(@RequestBody Schedule schedule){
+    public Result insertschedule(@RequestBody Schedule schedule) {
         Result result = userService.insertschedule(schedule);
         return result;
     }
+
     @GetMapping("schedulelist")
-    public Object findschedule(SearchBean searchBean){
+    public Object findschedule(SearchBean searchBean) {
         HashMap<String, Object> map = userService.findschedule(searchBean);
         return map;
     }
 
     @PostMapping("delSchedule")
-    public Result delSchedule(@RequestBody Integer[] rows){
+    public Result delSchedule(@RequestBody Integer[] rows) {
         Result result = userService.delSchedule(rows);
         return result;
     }
 
     @PostMapping("editschedule")
-    public Result editschedule(@RequestBody Schedule schedule){
+    public Result editschedule(@RequestBody Schedule schedule) {
         Result result = userService.editschedule(schedule);
         return result;
     }
