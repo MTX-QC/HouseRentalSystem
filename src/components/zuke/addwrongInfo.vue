@@ -70,7 +70,7 @@ const form = reactive({
   user_id: "",
 });
 onMounted(() => {
-  form.houseId = houselist.rowData.houseId;
+  form.houseId = houselist.rowData.house_id;
   form.address = houselist.rowData.address;
   form.name = houselist.rowData.userlist.name;
   form.user_id = houselist.rowData.user_id;

@@ -19,7 +19,7 @@
               empty-text="暂无数据"
               @selection-change="handleSelectionChange">
       <el-table-column align="center"
-                       prop="houseId"
+                       prop="house_id"
                        label="房屋ID"
                        width="100" />
       <el-table-column align="center"

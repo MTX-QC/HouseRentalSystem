@@ -18,7 +18,7 @@
     >
       <el-table-column
         align="center"
-        prop="house_id"
+        prop="houseId"
         label="房屋ID"
         width="180"
       />

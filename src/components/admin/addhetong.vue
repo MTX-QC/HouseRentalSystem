@@ -30,7 +30,7 @@
       </el-form-item>
 
       <el-form-item label="租方(乙方):">
-        <el-input v-model="form.zuke" placeholder="请输入租方姓名" />
+        <el-input v-model="form.zuke" placeholder="请确认的租方姓名，否则失败！" />
       </el-form-item>
 
       <div class="btn">
