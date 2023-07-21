@@ -16,7 +16,7 @@ public interface ApplyMapper {
     @Insert("insert into Hetong(chuzu,chuzu_idcard,zuke,zuke_idcard,fromdate,todate,price,address,house_id,payday) values(#{chuzu},#{chuzuIdcard},#{zuke},#{zukeIdcard},#{fromdate},#{todate},#{price},#{address},#{houseId},#{payday})")
     int addhetong(Hetong hetong);
 
-    @Insert("insert into zulist(house_id,price,address,user_id) values (#{houseId},#{price},#{address},#{zukeUserId}) ")
+    @Insert("insert into zulist(house_id,price,address,user_id,contract_id) values (#{houseId},#{price},#{address},#{zukeUserId},'52') ")
     int addzulist(String houseId,Double price,String address,Integer zukeUserId);
 
 
